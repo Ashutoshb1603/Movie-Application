@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_06_112444) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_07_061903) do
   create_table "countries", force: :cascade do |t|
     t.integer "country_iso_code"
     t.string "country_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "department_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genders", force: :cascade do |t|
+    t.string "gender"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,6 +51,34 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_06_112444) do
   create_table "languages", force: :cascade do |t|
     t.string "language_code"
     t.string "language_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "movie_casts", force: :cascade do |t|
+    t.string "movie_id"
+    t.string "gender_id"
+    t.string "person_id"
+    t.string "character_name"
+    t.string "cast_order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "movie_companies", force: :cascade do |t|
+    t.integer "production_company_id", null: false
+    t.integer "movies_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movies_id"], name: "index_movie_companies_on_movies_id"
+    t.index ["production_company_id"], name: "index_movie_companies_on_production_company_id"
+  end
+
+  create_table "movie_crews", force: :cascade do |t|
+    t.string "movie_id"
+    t.string "person_id"
+    t.string "department_id"
+    t.string "job"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -86,6 +126,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_06_112444) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "people", force: :cascade do |t|
+    t.string "person_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "production_companies", force: :cascade do |t|
+    t.text "company_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "production_countries", force: :cascade do |t|
     t.integer "movie_id"
     t.integer "country_id"
@@ -93,6 +145,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_06_112444) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "movie_companies", "movies", column: "movies_id"
+  add_foreign_key "movie_companies", "production_companies"
   add_foreign_key "movie_generes", "generes"
   add_foreign_key "movie_generes", "movies"
   add_foreign_key "movie_keywords", "keywords"
