@@ -1,0 +1,11 @@
+<h2>"Title:- "<%=@movie.title%></h2>
+<h3>"Budget:- "<%=@movie.budget%></h3>
+
+
+<% if @movie.image.present?%>
+  <%= image_tag @movie.image%>
+  <%end%>
+<ul>
+<li><%= link_to "Edit", edit_movie_path(@movie) %></li>
+<li><%= link_to "Views", new_movie_path(@movie) %></li>
+</ul>

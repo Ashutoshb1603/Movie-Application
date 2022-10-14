@@ -1,0 +1,41 @@
+<%= form_with model: @movie do |form| %>
+    <div>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+      <% movie.errors.full_messages_for(:title).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  
+    <div>
+      <%= form.label :budget %><br>
+      <%= form.text_field :budget %><br>
+      <% movie.errors.full_messages_for(:budget).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <%= form.fields_for :movie_generes do |movie_genere| %>
+      <div>
+        <%= movie_genere.label :movie_id %><br/>
+        <%= movie_genere.text_field :movie_id %>
+      </div>
+
+      <div>
+        <%= movie_genere.label :genere_id %><br/>
+        <%= movie_genere.select :genere_id, Genere.all.where.not(genere_name: nil).map{|genre| [genre.genere_name, genre.id]} %>
+      </div>
+    <% end %>
+
+    
+  
+    <div>
+    <%= form.label :image %><br>
+    <%= form.file_field :image %><br>
+    
+    </div>
+    <%= form.submit %>
+    <% end %>
+    
+
+

@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-FactoryBot.define do
+  FactoryBot.define do
 
     factory :movie do
       title     { Faker::Movie.title }
@@ -36,72 +36,72 @@ FactoryBot.define do
     end 
 
     
-end
+  end
 
-myArray= ["staff", "DOP", "Jr.Artist", "Sr.Artist", "Costume", "Makeup", "Action & stunt","Camera & lighting" ,"diretor's" , "story writing" , "special effect" , "production","E.T.C." ] 
+  myArray= ["staff", "DOP", "Jr.Artist", "Sr.Artist", "Costume", "Makeup", "Action & stunt","Camera & lighting" ,"diretor's" , "story writing" , "special effect" , "production","E.T.C." ] 
+
+  myGenere= [" romance", "detective", "fiction", "tragedy", "comedy",  "epic", "Action", "Comedy" ,"Drama " ,"Fantasy", "Horror", "Mystery" ,"Thriller"]
 
 
-
-
-20.times do |i|
-    puts "creating movies"
-    FactoryBot.create(:movie)
-
-   
-   
-    puts "creating countries"
-    FactoryBot.create(:country)
+  25.times do |i|
+      puts "creating movies"
+      FactoryBot.create(:movie)
 
    
-    puts "creating languages"
-    Language.create(
-        language_name: "language#{i+1}" ,
-        language_code: "#{i+1}"
-    )
-    
    
-    puts "creating language_roles";
-    LanguageRole.create(
-        language_role: "role #{i+1}"
-    )
-    
-    
-    
-    puts "creating generes"
-    Genere.create(
-        genere_name: "genere#{i+1}"
-    )
+     puts "creating countries"
+     FactoryBot.create(:country)
 
-    
-    
-    puts "creating keywords"
-    Keyword.create(
-        keyword_name: "keyword#{i+1}"
-    )
-    
-
-    puts "creating production_companies"
-    FactoryBot.create(:production_company)
-
-
-    
-    puts "creating departments"
-    Department.create(
+   
+        puts "creating languages"
+        Language.create(
+            language_name: "language#{i+1}" ,
+            language_code: "#{i+1}"
+        )
         
-        department_name: myArray[rand(myArray.length)]
+    
+        puts "creating language_roles";
+        LanguageRole.create(
+            language_role: "role #{i+1}"
+        )
+        
+        
+        
+        puts "creating generes"
+        Genere.create(
+            genere_name: myGenere[rand(myGenere.length)]
+        )
 
-    )
-    
-    puts "creating genders"
-    Gender.create(
-        gender: ["M", "F", "O"].sample
-    )
-    
-    puts "creating people"
-    Person.create(
-        person_name: "Person#{i+1}"
-    )
-end
+        
+        
+        puts "creating keywords"
+        Keyword.create(
+            keyword_name: "keyword#{i+1}"
+        )
+        
+
+        puts "creating production_companies"
+        FactoryBot.create(:production_company)
+
+
+        
+        puts "creating departments"
+        Department.create(
+            
+            department_name: myArray[rand(myArray.length)]
+
+        )
+        
+        puts "creating genders"
+        Gender.create(
+            gender: ["M", "F", "O"].sample
+        )
+        
+        puts "creating people"
+        Person.create(
+            person_name: "Person#{i+1}"
+        )
+    end
 
 
 
